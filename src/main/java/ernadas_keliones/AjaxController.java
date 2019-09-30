@@ -16,6 +16,9 @@ public class AjaxController {
 	@Autowired
 	KelionesRepository kelionesRepository;
 	
+	@Autowired
+	KlientaiRepository klientaiRepository;	
+	
 	@GetMapping(path="/saugoti-kelione") // Map ONLY GET Requests
 	public @ResponseBody String saugotiKelione (@RequestParam Integer id 
 			, @RequestParam String pav
@@ -77,9 +80,72 @@ public class AjaxController {
 	}		
 
 	@GetMapping(path="/lst-keliones")
-	public @ResponseBody Iterable<Keliones> getAllKategorijos() {
+	public @ResponseBody Iterable<Keliones> getAllKeliones() {
 		// This returns a JSON or XML with the users
 		return kelionesRepository.findAll();
 	}	
 
+	@GetMapping(path="/saugoti-klienta") // Map ONLY GET Requests
+	public @ResponseBody String saugotiKlienta (@RequestParam Integer id 
+			, @RequestParam String pav
+			, @RequestParam Integer flagPoilsines
+			, @RequestParam Integer flagPazintines	
+			, @RequestParam Integer flagViskasIsk	
+			, @RequestParam Integer flagLaisvPasir
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		String res = "Not done";
+		Klientai n = new Klientai();
+		
+		if (id > 0) {
+		
+			Optional <Klientai> found = klientaiRepository.findById( id );
+		
+			// variantas trynimuiui
+			// uzsakymaiRepository.deleteById(id);
+		
+			if ( found.isPresent() ) {
+			
+			   n = found.get();
+			   n.setId(id);
+			}
+		}
+		
+	    n.setPav( pav );
+	    n.setFlagPazintines(flagPazintines);
+	    n.setFlagPoilsines(flagPoilsines);
+		n.setFlagViskasIsk(flagViskasIsk);
+		n.setFlagLaisvPasir(flagLaisvPasir);
+	    klientaiRepository.save(n);	
+	    res = "Saved";
+	    
+		return res;
+	}
+	
+	@GetMapping(path="/salinti-klienta") // Map ONLY GET Requests
+	public @ResponseBody String salintiKlienta (@RequestParam Integer id 
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		Optional <Klientai> found = klientaiRepository.findById( id );
+		
+		String res = "Not done";
+		
+		if ( found.isPresent() ) {
+			
+			   Klientai n = found.get();
+			   klientaiRepository.deleteById(id);
+			   res = "Deleted";
+		}		
+		return res;
+	}		
+
+	@GetMapping(path="/lst-klientai")
+	public @ResponseBody Iterable<Klientai> getAllKlientai() {
+		// This returns a JSON or XML with the users
+		return klientaiRepository.findAll();
+	}	
 }

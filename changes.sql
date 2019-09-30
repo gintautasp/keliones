@@ -8,3 +8,11 @@ CHANGE `flag_poilsines` `flag_poilsines` TINYINT(3) UNSIGNED NULL DEFAULT NULL
 , CHANGE `flag_pazintines` `flag_pazintines` TINYINT(3) UNSIGNED NULL DEFAULT NULL
 , CHANGE `flag_viskas_isk` `flag_viskas_isk` TINYINT(3) UNSIGNED NULL DEFAULT NULL
 , CHANGE `flag_laisv_pasir` `flag_laisv_pasir` TINYINT(3) UNSIGNED NULL DEFAULT NULL;
+
+ALTER TABLE `klientai` DROP `apras`;
+
+ALTER TABLE 
+`klientai` CHANGE `flag_poilsines` `flag_poilsines` TINYINT(3) UNSIGNED NULL DEFAULT NULL
+, CHANGE `flag_pazintines` `flag_pazintines` TINYINT(3) UNSIGNED NULL DEFAULT NULL
+, CHANGE `flag_viskas_isk` `flag_viskas_isk` TINYINT(3) UNSIGNED NULL DEFAULT NULL
+, CHANGE `flag_laisv_pasir` `flag_laisv_pasir` TINYINT(3) UNSIGNED NULL DEFAULT NULL;

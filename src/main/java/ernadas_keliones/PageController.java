@@ -11,5 +11,10 @@ public class PageController {
     public String keliones() {
         return "keliones";
     }	
+    
+    @GetMapping("/klientai")
+    public String klientai() {
+        return "klientai";
+    }    
 
 }
