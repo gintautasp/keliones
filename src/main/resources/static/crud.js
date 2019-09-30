@@ -99,8 +99,21 @@
 			this.params.res_str += '<tr data-id="' + eval ( 'this.params.data' +this.params.field_data + '[ i ].id' ) +'" ><td>' + i + '</td>';
 																														// alert ( 'this.params.fields.length' + this.params.fields.length );
 			for ( k=0; k < this.params.fields.length; k++ ) {
+				
+				field_val = field_val_show = eval (  'this.params.data' + this.params.field_data +'[ i ].' + this.params.fields [ k ] );
+				
+				if (  this.params.fields [ k ].substr ( 0, 4 ) == "flag" ) {
+					
+					field_val_show = '&#x2610';
 			
-				this.params.res_str += '<td>'+ eval (  'this.params.data' + this.params.field_data +'[ i ].' + this.params.fields [ k ] ) + '</td>';
+					
+					if ( parseInt ( field_val ) > 0 )  {
+						
+						field_val_show = '&#x2611;'
+					} 
+				}
+			
+				this.params.res_str += '<td>'+ field_val_show  + '</td>';
 			}
 			
 			this.params.res_str += this.addColumns();
@@ -185,6 +198,12 @@
 							
 							$( this ).prop ( 'checked', $( this ).val() == field_val );
 						});
+						
+						break;
+						
+					case 'checkbox': 
+						
+						$( '#' +  i_am.params.fields[ k ] ).prop ( 'checked', parseInt ( field_val ) > 0 );
 						
 						break;
 						
@@ -410,12 +429,21 @@
 					
 					break;
 					
+				case 'checkbox':
+
+						if ( $(  '#' +  i_am.params.ed_fields[ k ] ).prop ( 'checked' ) ) {
+						
+							params_str +=  $( '#' +  i_am.params.ed_fields[ k ]  ).val();
+						}				
+					
+					break;
+					
 				default:
 																										// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
 					params_str += $( '#' +  i_am.params.fields[ k ]  ).val ();
 			}
 		}
-																							alert (  'saving'  + i_am.params.url_save_rec + params_str );
+																							// alert (  'saving'  + i_am.params.url_save_rec + params_str );
 		$.ajax(
 			{
 				url: i_am.params.url_save_rec + params_str

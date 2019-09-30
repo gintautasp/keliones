@@ -20,10 +20,10 @@ public class AjaxController {
 	public @ResponseBody String saugotiKelione (@RequestParam Integer id 
 			, @RequestParam String pav
 			, @RequestParam String apras
-			, @RequestParam Integer flag_poilsines
-			, @RequestParam Integer flag_pazintines	
-			, @RequestParam Integer flag_viskas_isk	
-			, @RequestParam Integer flag_laisv_pasir
+			, @RequestParam Integer flagPoilsines
+			, @RequestParam Integer flagPazintines	
+			, @RequestParam Integer flagViskasIsk	
+			, @RequestParam Integer flagLaisvPasir
 			) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
@@ -47,10 +47,10 @@ public class AjaxController {
 		
 	    n.setPav( pav );
 	    n.setApras(apras);
-	    n.setFlagPazintines(flag_pazintines);
-	    n.setFlagPoilsines(flag_poilsines);
-		n.setFlagViskasIsk(flag_viskas_isk);
-		n.setFlagLaisvPasir(flag_laisv_pasir);
+	    n.setFlagPazintines(flagPazintines);
+	    n.setFlagPoilsines(flagPoilsines);
+		n.setFlagViskasIsk(flagViskasIsk);
+		n.setFlagLaisvPasir(flagLaisvPasir);
 	    kelionesRepository.save(n);	
 	    res = "Saved";
 	    
