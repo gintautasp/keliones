@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 
 @Entity
@@ -27,6 +30,10 @@ public class Klientai {
     private Integer flagViskasIsk;	
     
     private Integer flagLaisvPasir;
+    
+    @JsonIgnoreProperties("klientai")    
+    @OneToMany(mappedBy = "klientai",cascade = CascadeType.ALL)
+    private List<KlientaiKeliones> klientaiKeliones;    
 
 	public Integer getId() {
 		return id;
@@ -84,5 +91,11 @@ public class Klientai {
 		this.flagLaisvPasir = flagLaisvPasir;
 	}
 	
+	public Iterable<KlientaiKeliones> getKlientaiKeliones() {
+		return klientaiKeliones;
+	}
 
+	public void setKlientaiKeliones(List<KlientaiKeliones> klientaiKeliones) {
+		this.klientaiKeliones = klientaiKeliones;
+	}
 }

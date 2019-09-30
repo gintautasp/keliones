@@ -24,7 +24,8 @@
 		this.params.ed_fields = params.fields_edit;
 		this.params.ed_types = params.fields_ed_types;
 		
-		this.params.field_name = params.field_name;		
+		this.params.field_name = params.field_name;
+		this.params.details_url = params.details_url;
 																														// alert ( this.params.id_html_saraso );
 	}
 		
@@ -91,7 +92,11 @@
 		this.params.res_str = '<table>';			
 		
 		this.sarasoAntraste();
-																														// alert ( 'this.params.data 2 ' + JSON.stringify ( this.params.data ) );	
+									console.log ( 'this.params.data' + JSON.stringify ( eval ( 'this.params.data' ) ) );	
+									console.log ( 'this.params.data.klientaiKeliones' + JSON.stringify ( eval ( 'this.params.data.klientaiKeliones' ) ) );	
+
+
+									console.log ( 'this.params.data' + this.params.field_data + JSON.stringify ( eval ( 'this.params.data' + this.params.field_data ) ) );	
 		num_produktu = eval ( 'this.params.data' + this.params.field_data + '.length' );
 																														// alert ( 'num_produktu:' +  num_produktu );
 		for ( i = 0; i < num_produktu; i++) {
@@ -102,7 +107,7 @@
 				
 				field_val = field_val_show = eval (  'this.params.data' + this.params.field_data +'[ i ].' + this.params.fields [ k ] );
 				
-				if (  this.params.fields [ k ].substr ( 0, 4 ) == "flag" ) {
+				if (  this.params.fields [ k ].indexOf ( "flag" ) > -1 ) {
 					
 					field_val_show = '&#x2610';
 			
@@ -118,7 +123,18 @@
 			
 			this.params.res_str += this.addColumns();
 			
-			 this.params.res_str += '<td><input type="button" class="edit_button" value="redaguoti"><input  type="button" class="delete_button" value="šalinti"></td></tr>';
+			 this.params.res_str += '<td>' + 
+								'<input type="button" class="edit_button" value="redaguoti">' + 
+								'<input  type="button" class="delete_button" value="šalinti">' + 
+								( 
+										( ( typeof ( this.params.details_url ) != 'undefined' ) && ( this.params.details_url != '' ) ) ? 
+										'<a href="' +  
+										this.params.details_url + eval (  'this.params.data' + this.params.field_data +'[ i ].id' ) +
+										'" class="details">plačiau</a>' : 
+										'' 
+								) +
+							'</td>' + 
+						'</tr>';
 		} 
 		this.params.res_str += '</table>';
 		
@@ -440,7 +456,7 @@
 					
 				default:
 																										// alert (  i_am.params.fields [ k ]  + ': ' + field_val );
-					params_str += $( '#' +  i_am.params.fields[ k ]  ).val ();
+					params_str += $( '#' +  i_am.params.ed_fields[ k ]  ).val ();
 			}
 		}
 																							// alert (  'saving'  + i_am.params.url_save_rec + params_str );

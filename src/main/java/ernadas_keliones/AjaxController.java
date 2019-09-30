@@ -19,6 +19,9 @@ public class AjaxController {
 	@Autowired
 	KlientaiRepository klientaiRepository;	
 	
+	@Autowired
+	KlientaiKelionesRepository klientaiKelionesRepository;		
+	
 	@GetMapping(path="/saugoti-kelione") // Map ONLY GET Requests
 	public @ResponseBody String saugotiKelione (@RequestParam Integer id 
 			, @RequestParam String pav
@@ -147,5 +150,80 @@ public class AjaxController {
 	public @ResponseBody Iterable<Klientai> getAllKlientai() {
 		// This returns a JSON or XML with the users
 		return klientaiRepository.findAll();
+	}	
+	
+	@GetMapping(path="/klientas")
+	public @ResponseBody Optional<Klientai> getKlientas(@RequestParam Integer id) {
+		// This returns a JSON or XML with the users
+		Optional <Klientai> found = klientaiRepository.findById( id );		
+		/*
+		if ( found.isPresent() ) {
+			
+			   Uzsakymai n = found.get();
+		}		
+		*/	
+		return found;
+	}	
+	
+	@GetMapping(path="/kliento-kelione") // Map ONLY GET Requests
+	public @ResponseBody String saugotiProduktaPatiekalo (@RequestParam Integer id 
+			, @RequestParam(defaultValue="0") Integer id_kl
+			, @RequestParam(defaultValue="0") Integer id_keliones
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		String res = "Not done";
+		KlientaiKeliones n = new KlientaiKeliones();
+		
+		System.out.println ( "id: " + id + " kliento. id: " + id_kl + " keliones. id " + id_keliones );
+		
+		if (id > 0) {
+		
+			Optional <KlientaiKeliones> found = klientaiKelionesRepository.findById( id );
+		
+			// variantas trynimuiui
+			// uzsakymaiRepository.deleteById(id);
+		
+			if ( found.isPresent() ) {
+			
+			   n = found.get();
+			  //  n.setId(id);
+			}
+			
+		} else {
+		
+			if ( ( id_kl > 0 ) && ( id_keliones > 0 ) ) {
+				
+				n.setKlientai_id ( id_kl );
+				n.setKeliones_id( id_keliones );
+			}
+		}
+		
+		System.out.println ( n.toString() );			   			   
+		klientaiKelionesRepository.save(n);	
+		res = "Saved";
+	    
+		return res;
+	}
+	
+	@GetMapping(path="/salinti-kliento-kelione") // Map ONLY GET Requests
+	public @ResponseBody String salintiKlientoKelione (@RequestParam Integer id_kl
+			, @RequestParam Integer id 
+			) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		Optional <KlientaiKeliones> found = klientaiKelionesRepository.findById( id );
+		
+		String res = "Not done";
+		
+		if ( found.isPresent() ) {
+			
+			   KlientaiKeliones n = found.get();
+			   klientaiKelionesRepository.deleteById(id);
+			   res = "Deleted";
+		}		
+		return res;
 	}	
 }
