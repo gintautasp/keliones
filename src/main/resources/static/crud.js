@@ -123,16 +123,34 @@
 			
 			this.params.res_str += this.addColumns();
 			
+			add_rel_links = '';
+			
+			if ( typeof ( this.params.details_url ) != 'undefined' ) {
+				
+				if ( ( typeof ( this.params.details_url ) == 'string' ) && ( this.params.details_url != '' ) ) {
+					
+					add_rel_links += '<a href="' +  
+										this.params.details_url + eval (  'this.params.data' + this.params.field_data +'[ i ].id' ) +
+								'" class="details">plačiau</a>';
+			
+				}
+				
+				if ( Array.isArray ( this.params.details_url ) && ( this.params.details_url.length > 0 ) ) {
+					
+					for ( t = 0; t < this.params.details_url.length; t++ ) {
+				
+						add_rel_links += ' <a href="' +  
+											this.params.details_url [ t ].url  + eval (  'this.params.data' + this.params.field_data + '[ i ].id' ) +
+									'" class="details">' + this.params.details_url [ t ].name + '</a>';	
+						
+					}
+				}
+			}	
+				
 			 this.params.res_str += '<td>' + 
 								'<input type="button" class="edit_button" value="redaguoti">' + 
 								'<input  type="button" class="delete_button" value="šalinti">' + 
-								( 
-										( ( typeof ( this.params.details_url ) != 'undefined' ) && ( this.params.details_url != '' ) ) ? 
-										'<a href="' +  
-										this.params.details_url + eval (  'this.params.data' + this.params.field_data +'[ i ].id' ) +
-										'" class="details">plačiau</a>' : 
-										'' 
-								) +
+								add_rel_links +
 							'</td>' + 
 						'</tr>';
 		} 
