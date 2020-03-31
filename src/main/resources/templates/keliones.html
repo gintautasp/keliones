@@ -4,7 +4,8 @@
     <title>Keliones</title>
     <meta charset="utf-8">
     		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    		<link rel="stylesheet" href="jqueryui.css">		
+    		<link rel="stylesheet" href="jqueryui.css">	
+		<link rel="stylesheet" href="main.css">		
 		<style>
 			.anuliuotas, .sanuliuotas {
 				background-color: lightblue;
@@ -63,6 +64,9 @@
 	</script>
 </head>
 <body>
+    <nav>
+	<a th:each="menu_item : ${lst_menu}" th:href="${menu_item.itemurl()}" th:text="${menu_item}"></a>
+    </nav>
 <div id="keliones-dialog" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 0px; max-height: none; height: 259.053px;">
 <p class="validateTips">Visi laukeliai turi buti užpildyti.</p><p class="name_item" id="name_item">Nauja Kelione</p>
 <form action=""><fieldset><label for="pav">Kelionė</label>

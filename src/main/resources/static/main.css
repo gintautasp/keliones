@@ -25,7 +25,7 @@
 		opacity: 0.8;
 	}
 	nav a {
-		display: inline-block;
+		display: inline-block ! important;
 		width: 100px;
 		padding: 12px;
 		margin: -40px 12px 12px 12px;
