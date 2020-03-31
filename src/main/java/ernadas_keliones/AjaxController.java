@@ -87,6 +87,12 @@ public class AjaxController {
 		// This returns a JSON or XML with the users
 		return kelionesRepository.findAll();
 	}	
+	
+	@GetMapping(path="/lst-kelionesx")
+	public @ResponseBody Iterable<Keliones> getAllKelionesX() {
+		// This returns a JSON or XML with the users
+		return kelionesRepository.findAll();
+	}	
 
 	@GetMapping(path="/saugoti-klienta") // Map ONLY GET Requests
 	public @ResponseBody String saugotiKlienta (@RequestParam Integer id 

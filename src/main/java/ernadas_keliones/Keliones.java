@@ -18,7 +18,11 @@ public class Keliones {
 
     private String pav;
     
-    private String apras;	
+    private String apras;
+    
+    private Double kaina;
+    
+    private Integer trukmeVal;
     
     private Integer flagPoilsines;	
     
@@ -50,6 +54,23 @@ public class Keliones {
 
 	public void setApras(String apras) {
 		this.apras = apras;
+	}
+	
+
+	public Double getKaina() {
+		return kaina;
+	}
+
+	public void setKaina(Double kaina) {
+		this.kaina = kaina;
+	}
+
+	public Integer getTrukmeVal() {
+		return trukmeVal;
+	}
+
+	public void setTrukmeVal(Integer trukmeVal) {
+		this.trukmeVal = trukmeVal;
 	}
 
 	public Integer getFlagPoilsines() {

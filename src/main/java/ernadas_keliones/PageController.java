@@ -13,6 +13,11 @@ public class PageController {
         return "keliones";
     }	
     
+    @GetMapping("/kelionesx")
+    public String kelionesx() {
+        return "kelionesx";
+    }    
+    
     @GetMapping("/klientai")
     public String klientai() {
         return "klientai";
