@@ -108,8 +108,8 @@ public class AjaxController {
 	/**
 	 * Pateikia visų kelionių JSON sąrašą
 	 * 
-	 * [@link Keliones]
-	 * @return Iterable<Keliones>
+	 * {@link Keliones}
+	 * @return keliones Iterable<Keliones>
 	 */
 	@GetMapping(path="/lst-kelionesx")
 	public @ResponseBody Iterable<Keliones> getAllKelionesX() {
