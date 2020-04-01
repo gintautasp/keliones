@@ -9,10 +9,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+
+/**
+ * 
+ * Pavyzdinė mokomosios web aplikacijos - kelionių informacinės sistemos AJAX užklausų kontroleris
+ * 
+ * @author shplintas
+ *
+ */
+
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/ajax") // This means URL's start with /demo (after Application path)
 public class AjaxController {
 	
+	
+	/**
+	 * Duomenų bazės lentelės <i>keliones</i> JPA repositorija
+	 * 
+	 * @see <a href="https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html">JPA repositorija</a>
+	 * {@link Keliones}
+	 */	
 	@Autowired
 	KelionesRepository kelionesRepository;
 	
@@ -86,8 +103,14 @@ public class AjaxController {
 	public @ResponseBody Iterable<Keliones> getAllKeliones() {
 		// This returns a JSON or XML with the users
 		return kelionesRepository.findAll();
-	}	
+	}
 	
+	/**
+	 * Pateikia visų kelionių JSON sąrašą
+	 * 
+	 * [@link Keliones]
+	 * @return Iterable<Keliones>
+	 */
 	@GetMapping(path="/lst-kelionesx")
 	public @ResponseBody Iterable<Keliones> getAllKelionesX() {
 		// This returns a JSON or XML with the users

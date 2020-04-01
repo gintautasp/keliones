@@ -39,6 +39,12 @@ public class PageController {
         return "keliones";
     }	
     
+	/**
+	 * Gražina puslapio, kuris per AJAX užkrauna, savyje užkrauna kelionių sąrašą, šabloną kelionex
+	 * 
+	 * {@link AjaxController#getAllKelionesX}
+	 * @return puslapio šablonas kelionex
+	 */    
     @GetMapping("/kelionesx")
     public String kelionesx() {
         return "kelionesx";
